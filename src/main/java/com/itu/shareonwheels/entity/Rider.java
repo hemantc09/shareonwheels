@@ -7,13 +7,4 @@ import java.util.List;
  */
 public class Rider extends User {
 
-    private Long riderId;
-
-    public Long getRiderId() {
-        return riderId;
-    }
-
-    public void setRiderId(Long riderId) {
-        this.riderId = riderId;
-    }
 }
