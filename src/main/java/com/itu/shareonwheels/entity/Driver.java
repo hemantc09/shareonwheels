@@ -11,6 +11,10 @@ public class Driver extends User {
 
     private Vehicle vehicle;
 
+    private double rating;
+
+    private int totalNumberOfTrips;
+
     private List<DriverSchedule> driverScheduleList;
 
     public Long getDriverId() {
@@ -27,6 +31,22 @@ public class Driver extends User {
 
     public void setVehicle(Vehicle vehicle) {
         this.vehicle = vehicle;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public int getTotalNumberOfTrips() {
+        return totalNumberOfTrips;
+    }
+
+    public void setTotalNumberOfTrips(int totalNumberOfTrips) {
+        this.totalNumberOfTrips = totalNumberOfTrips;
     }
 
     public List<DriverSchedule> getDriverScheduleList() {
