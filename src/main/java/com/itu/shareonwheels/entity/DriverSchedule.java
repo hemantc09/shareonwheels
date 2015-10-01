@@ -13,6 +13,8 @@ import java.util.Date;
 public class DriverSchedule {
 
 
+    private Long scheduleId;
+
     private TripType tripType;
 
     private Time onwardTime;
@@ -28,6 +30,22 @@ public class DriverSchedule {
     private Frequency frequency;
 
     private Long driverId;
+
+    public Long getScheduleId() {
+        return scheduleId;
+    }
+
+    public void setScheduleId(Long scheduleId) {
+        this.scheduleId = scheduleId;
+    }
+
+    public Long getDriverId() {
+        return driverId;
+    }
+
+    public void setDriverId(Long driverId) {
+        this.driverId = driverId;
+    }
 
     public TripType getTripType() {
         return tripType;
