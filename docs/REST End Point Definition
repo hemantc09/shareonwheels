@@ -1,0 +1,23 @@
+Registration: Create User on click of register button
+
+POST {base url}/shareonwheels/v1/user
+
+Updating user profile
+
+PUT {base url}/shareonwheels/v1/users/{userId}
+
+Get User Details
+
+GET {base url}/shareonwheels/v1/users/{userId}
+
+Get All Users
+
+GET {base url}/shareonwheels/v1/users
+
+Register Driver
+
+POST {base url}/shareonwheels/v1/users/{userId}/driver
+
+Update Vehicle Details for driver
+
+POST {base url}/shareonwheels/v1/users/{userId}/driver/vehicle
