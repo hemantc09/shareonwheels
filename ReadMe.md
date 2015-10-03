@@ -5,6 +5,7 @@ This is repository for ITU Ride Share project “Share on Wheels”.
 ## Technologies used
 
 **Frontend:**
+
 * HTML
 * CSS
 * Java Script
@@ -12,6 +13,7 @@ This is repository for ITU Ride Share project “Share on Wheels”.
 
 
 **Backend:**
+
 * JAVA
 * Spring context for dependency management
 * RESTful services using Spring controllers
@@ -19,9 +21,11 @@ This is repository for ITU Ride Share project “Share on Wheels”.
 
 
 **Database:**
+
 * MySQL server
 
 **Build Management**
+
 * Maven
 
 
