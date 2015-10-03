@@ -5,24 +5,24 @@ This is repository for ITU Ride Share project “Share on Wheels”.
 ## Technologies used
 
 **Frontend:**
-HTML
-CSS
-Java Script
-Angular JS framework
+* HTML
+* CSS
+* Java Script
+* Angular JS framework
 
 
 **Backend:**
-JAVA
-Spring context for dependency management
-RESTful services using Spring controllers
-Spring JDBC
+* JAVA
+* Spring context for dependency management
+* RESTful services using Spring controllers
+* Spring JDBC
 
 
 **Database:**
-MySQL server
+* MySQL server
 
 **Build Management**
-Maven
+* Maven
 
 
 ## How to Setup?
