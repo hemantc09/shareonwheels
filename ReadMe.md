@@ -1,15 +1,31 @@
 ## Synopsis
 
-This is repository for ITU Ride Share project “Share on Wheels”
+This is repository for ITU Ride Share project “Share on Wheels”.
 
-## Code Example
-Test
-Show what the library does as concisely as possible, developers should be able to figure out **how** your project solves their problem by looking at the code example. Make sure the API you are showing off is obvious, and that your code is short and concise.
+## Technologies used
 
-## Motivation
+**Frontend:**
+HTML
+CSS
+Java Script
+Angular JS framework
 
-A short description of the motivation behind the creation and maintenance of the project. This should explain **why** the project exists.
 
-## Installation
+**Backend:**
+JAVA
+Spring context for dependency management
+RESTful services using Spring controllers
+Spring JDBC
 
-Provide code examples and explanations of how to get the project.
+
+**Database:**
+MySQL server
+
+**Build Management**
+Maven
+
+
+## How to Setup?
+
+
+## How to Run?
