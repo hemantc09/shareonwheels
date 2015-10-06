@@ -12,7 +12,7 @@ public class UserService implements GenericService<User, Long> {
 
 
     @Override
-    @Transactional
+
     public Long create(User user) {
         return null;
     }
@@ -34,6 +34,11 @@ public class UserService implements GenericService<User, Long> {
 
     @Override
     public void removeById(Long aLong) {
+
+    }
+    //not needed
+    public void name()
+    {
 
     }
 }
