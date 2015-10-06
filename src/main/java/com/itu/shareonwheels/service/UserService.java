@@ -1,7 +1,6 @@
 package com.itu.shareonwheels.service;
 
 import com.itu.shareonwheels.entity.User;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -31,14 +30,10 @@ public class UserService implements GenericService<User, Long> {
     public List<User> getAll() {
         return null;
     }
-
+//remove by id
     @Override
     public void removeById(Long aLong) {
 
     }
-    //not needed
-    public void name()
-    {
 
-    }
 }
