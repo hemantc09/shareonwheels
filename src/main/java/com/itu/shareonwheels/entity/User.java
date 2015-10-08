@@ -12,7 +12,9 @@ public class User {
     //DB generated user Id
     private Long userId;
 
+
     private String userName;
+
 
     private String password;
 

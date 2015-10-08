@@ -1,6 +1,8 @@
 package com.itu.shareonwheels.service;
 
+import com.itu.shareonwheels.dao.UserDao;
 import com.itu.shareonwheels.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -9,16 +11,17 @@ import java.util.List;
  */
 public class UserService implements GenericService<User, Long> {
 
+    @Autowired
+    private UserDao userDao;
 
     @Override
-
     public Long create(User user) {
-        return null;
+        return userDao.create(user);
     }
 
     @Override
     public void update(User user) {
-
+         userDao.update(user);
     }
 
     @Override
