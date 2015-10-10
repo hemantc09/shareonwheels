@@ -11,7 +11,7 @@ import org.springframework.jdbc.support.KeyHolder;
  * Created by nikitasonthalia on 10/10/15.
  */
 public class RoutineTripDaoImpl extends NamedParameterJdbcDaoSupport implements RoutineTripDao {
-    private static final String OnetimeTrip_Creation_Query= "insert into OnetimeTrip_Table (Start_Location,Destination,Time,Seat_Available,UserId,User_Type,Days_of_week,Frequency)" +
+    private static final String OnetimeTrip_Creation_Query= "insert into RoutineTrip_Table (Start_Location,Destination,Trip_Time,Seat_Available,UserId,User_Type,Days_of_week,Frequency)" +
             "values(:startLocation , :destination , :tripTime, :seatAvailable, :userId, :userType, :daysOfWeek, :frequency)";
 
     public void update(RoutineTrip routineTrip) {
