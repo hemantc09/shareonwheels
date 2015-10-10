@@ -7,8 +7,7 @@ public enum Frequency {
 
     ONE_TIME,
     EVERY_DAY,
-    EVERY_WEEK_DAY,
-    WVERY_WEEK_END,
+    EVERY_WEEK,
     WEEKLY,
     BI_WEEKLY,
     MONTHLY;

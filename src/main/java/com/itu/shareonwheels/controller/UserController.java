@@ -23,7 +23,7 @@ public class UserController {
 
     @RequestMapping(value = "/v1/user", method = RequestMethod.POST)
     public @ResponseBody Long signUp(@RequestBody UserSignUpDto userSignUpDto,
-                       HttpServletRequest request,
+                                     HttpServletRequest request,
                        HttpServletResponse response) {
 
         User user = new User();
