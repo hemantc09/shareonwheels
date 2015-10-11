@@ -11,6 +11,8 @@ public class Driver extends User {
 
     private Vehicle vehicle;
 
+    private String driverLicenseNumber;
+
     private double rating;
 
     private int totalNumberOfTrips;

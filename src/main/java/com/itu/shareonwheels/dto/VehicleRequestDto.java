@@ -1,11 +1,12 @@
-package com.itu.shareonwheels.entity;
+package com.itu.shareonwheels.dto;
 
+import com.itu.shareonwheels.entity.Driver;
 import com.itu.shareonwheels.enumerations.VehicleType;
 
 /**
- * Created by ramya on 9/30/15.
+ * Created by ramya on 10/8/15.
  */
-public class Vehicle {
+public class VehicleRequestDto {
 
     //DB generated vehicle Id
     private Long vehicleId;
@@ -19,8 +20,6 @@ public class Vehicle {
     private String licencePlateNumber;
 
     private VehicleType vehicleType;
-
-    private Long ownerId;
 
     public Long getVehicleId() {
         return vehicleId;
@@ -60,13 +59,5 @@ public class Vehicle {
 
     public void setVehicleType(VehicleType vehicleType) {
         this.vehicleType = vehicleType;
-    }
-
-    public Long getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(Long ownerId) {
-        this.ownerId = ownerId;
     }
 }

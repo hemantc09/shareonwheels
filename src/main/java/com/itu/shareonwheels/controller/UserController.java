@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class UserController {
 
-    @Autowired
+   @Autowired
     private UserService userService;
 
 
@@ -37,13 +37,35 @@ public class UserController {
         return userService.create(user);
 
     }
-
     @RequestMapping(value = "/v1/user/{userId}", method = RequestMethod.PUT)
-    public void getUserDetails(@PathVariable("userId") Long userId,
+    public void upateUser(@PathVariable("userId") Long userId,
                                              @RequestBody User user,
                                              HttpServletRequest request,
                                              HttpServletResponse response) {
 
+        user.setUserId(userId);
         userService.update(user);
     }
+
+    @RequestMapping(value = "/v1/user/{userId}", method = RequestMethod.DELETE)
+    public void deleteUSer(@PathVariable("userId") Long userId,
+                                  HttpServletRequest request,
+                                  HttpServletResponse response) {
+        userService.removeById(userId);
+    }
+
+    @RequestMapping(value = "/v1/user/{userId}", method = RequestMethod.GET)
+    public void getUser(@PathVariable("userId") Long userId,
+                                  HttpServletRequest request,
+                                  HttpServletResponse response) {
+        userService.get(userId);
+    }
+
+
+    @RequestMapping(value = "/v1/users", method = RequestMethod.GET)
+    public void getAllUsers(HttpServletRequest request,
+                            HttpServletResponse response) {
+        userService.getAll();
+    }
+
 }

@@ -67,11 +67,7 @@
             <artifactId>jetty-server</artifactId>
             <version>9.3.4.RC0</version>
         </dependency>
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-servlet</artifactId>
-            <version>9.3.4.RC0</version>
-        </dependency>
+
 
         <!--Mysql-->
         <dependency>

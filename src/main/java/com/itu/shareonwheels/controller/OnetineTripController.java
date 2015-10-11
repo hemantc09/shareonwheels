@@ -21,20 +21,20 @@ public class OnetineTripController {
     private OnetimeTripService onetimeTripService;
 
     @RequestMapping(value = "/v1/trip", method = RequestMethod.POST)
-    public @ResponseBody long TripRegistration(@RequestBody OnetineTripRegistrationDto onetineTripRegistrationDto,
+    public @ResponseBody long TripRegistration(@RequestBody OnetineTripRegistrationDto oneTimeTripRegistrationDto,
                           HttpServletRequest request,
                           HttpServletResponse response)
     {
 
         OnetimeTrip onetimeTrip = new OnetimeTrip();
 
-        onetimeTrip.setStartlocation(onetineTripRegistrationDto.getStartlocation());
-        onetimeTrip.setDestination(onetineTripRegistrationDto.getDestination());
-        onetimeTrip.setTriptime(onetineTripRegistrationDto.getTriptime());
-        onetimeTrip.setSeatavailable(onetineTripRegistrationDto.getSeatavailable());
-        onetimeTrip.setUserid(onetineTripRegistrationDto.getUserid());
-        onetimeTrip.setUsertype(onetineTripRegistrationDto.getUsertype());
-        onetimeTrip.setTripdate(onetineTripRegistrationDto.getTripdate());
+        onetimeTrip.setStartlocation(oneTimeTripRegistrationDto.getStartlocation());
+        onetimeTrip.setDestination(oneTimeTripRegistrationDto.getDestination());
+        onetimeTrip.setTriptime(oneTimeTripRegistrationDto.getTriptime());
+        onetimeTrip.setSeatavailable(oneTimeTripRegistrationDto.getSeatavailable());
+        onetimeTrip.setUserid(oneTimeTripRegistrationDto.getUserid());
+        onetimeTrip.setUsertype(oneTimeTripRegistrationDto.getUsertype());
+        onetimeTrip.setTripdate(oneTimeTripRegistrationDto.getTripdate());
 
 
         return  onetimeTripService.create(onetimeTrip);
