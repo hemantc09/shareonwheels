@@ -2,11 +2,20 @@ package com.itu.shareonwheels.dao.impl;
 
 import com.itu.shareonwheels.dao.UserDao;
 import com.itu.shareonwheels.entity.User;
+import org.springframework.jdbc.core.RowCallbackHandler;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.SingleColumnRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by ramya on 10/7/15.
@@ -21,6 +30,7 @@ public class UserDaoImpl extends NamedParameterJdbcDaoSupport implements UserDao
            " address = :address, gender = :gender, date_of_birth = :dateOfBirth WHERE user_id = :userId";
 
     private static final String USER_DELETION_QUERY = "DELETE FROM user WHERE user_id = :userId";
+
 
 
 
@@ -60,6 +70,23 @@ public class UserDaoImpl extends NamedParameterJdbcDaoSupport implements UserDao
     public void delete(Long userId) {
         getNamedParameterJdbcTemplate().update(USER_DELETION_QUERY,new MapSqlParameterSource()
                             .addValue("userId",userId));
+    }
+
+    public boolean verifyLogin(String userName, String password) {
+        String VERIFY_USER_LOGIN_QUERY =  "select count(*) from user WHERE userName=:userName and password = :password";
+
+        SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("userName",userName).addValue("password",password);
+
+        int rowCount = getNamedParameterJdbcTemplate().queryForObject(VERIFY_USER_LOGIN_QUERY,
+                namedParameters,
+                Integer.class);
+
+        if(rowCount == 1){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
 
