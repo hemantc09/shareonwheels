@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
  * Created by nikitasonthalia on 10/9/15.
  */
 
-@Repository
+
 public class OnetimeTripDaoImpl extends NamedParameterJdbcDaoSupport implements OnetimeTripDao {
 
 

@@ -4,12 +4,14 @@ package com.itu.shareonwheels.service;
 import com.itu.shareonwheels.dao.RoutineTripDao;
 import com.itu.shareonwheels.entity.RoutineTrip;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by nikitasonthalia on 10/10/15.
  */
+
 public class RoutineTripService  implements GenericService<RoutineTrip, Long>
 {
     @Autowired

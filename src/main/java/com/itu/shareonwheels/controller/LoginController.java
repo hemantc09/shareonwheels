@@ -18,11 +18,12 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 public class LoginController {
+
     @Autowired
     private LoginService loginService;
 
 
-    @RequestMapping(value = "/v1/user", method = RequestMethod.POST)
+    @RequestMapping(value = "/v1/login", method = RequestMethod.POST)
     public @ResponseBody
     void signUp(@RequestBody LoginRequestDto loginRequestDto,
                 HttpServletRequest request,

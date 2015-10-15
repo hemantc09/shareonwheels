@@ -2,6 +2,7 @@ package com.itu.shareonwheels.dao.impl;
 
 import com.itu.shareonwheels.dao.UserDao;
 import com.itu.shareonwheels.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SingleColumnRowMapper;
@@ -12,6 +13,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -23,8 +25,13 @@ import java.util.Map;
 @Repository
 public class UserDaoImpl extends NamedParameterJdbcDaoSupport implements UserDao {
 
-    private static final String USER_CREATION_QUERY = "insert into user (user_id, user_name, first_name, last_name, email, phone, password) " +
-            "values (user_seq.nextVal, :userName, :firstName, :lastName, :email, :phone, :password)";
+    @Autowired
+    public UserDaoImpl(DataSource dataSource) {
+        setDataSource(dataSource);
+    }
+
+    private static final String USER_CREATION_QUERY = "insert into user (user_name, first_name, last_name, email_address, phone_number, password) " +
+            "values (:userName, :firstName, :lastName, :email, :phone, :password)";
 
     private static final String USER_UPDATION_QUERY = "update user SET first_name = :firstName,last_Name = :lastName,phone_number = :phoneNumber,"+
            " address = :address, gender = :gender, date_of_birth = :dateOfBirth WHERE user_id = :userId";

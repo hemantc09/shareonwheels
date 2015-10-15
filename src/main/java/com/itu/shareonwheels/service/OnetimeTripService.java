@@ -3,12 +3,14 @@ package com.itu.shareonwheels.service;
 import com.itu.shareonwheels.dao.OnetimeTripDao;
 import com.itu.shareonwheels.entity.OnetimeTrip;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by nikitasonthalia on 10/9/15.
  */
+
 public class OnetimeTripService implements GenericService< OnetimeTrip, Long>
 {
     @Autowired

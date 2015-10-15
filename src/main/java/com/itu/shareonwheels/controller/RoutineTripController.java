@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletResponse;
  * Created by nikitasonthalia on 10/10/15.
  */
 
-@Controller
 public class RoutineTripController {
 
     @Autowired

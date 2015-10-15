@@ -3,12 +3,14 @@ package com.itu.shareonwheels.service;
 import com.itu.shareonwheels.dao.UserDao;
 import com.itu.shareonwheels.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by ramya on 9/28/15.
  */
+@Service
 public class UserService implements GenericService<User, Long> {
 
     @Autowired

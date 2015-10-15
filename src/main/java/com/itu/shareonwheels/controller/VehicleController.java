@@ -4,6 +4,7 @@ import com.itu.shareonwheels.dto.VehicleRequestDto;
 import com.itu.shareonwheels.entity.Vehicle;
 import com.itu.shareonwheels.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import java.util.List;
 /**
  * Created by ramya on 10/8/15.
  */
+@Controller
 public class VehicleController {
 
     @Autowired

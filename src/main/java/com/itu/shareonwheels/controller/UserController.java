@@ -3,12 +3,15 @@ package com.itu.shareonwheels.controller;
 import com.itu.shareonwheels.dto.UserSignUpDto;
 import com.itu.shareonwheels.entity.User;
 import com.itu.shareonwheels.service.UserService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * Created by ramya on 9/28/15.
@@ -17,7 +20,9 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class UserController {
 
-   @Autowired
+    private static Log logger = LogFactory.getLog(UserController.class);
+
+    @Autowired
     private UserService userService;
 
 
@@ -30,13 +35,15 @@ public class UserController {
         user.setFirstName(userSignUpDto.getFirstName());
         System.out.println(userSignUpDto.getFirstName());
         user.setLastName(userSignUpDto.getLastName());
-        user.setUserName(userSignUpDto.getEmail());
-        user.setEmailAddress(userSignUpDto.getEmail());
-        user.setPhoneNumber(userSignUpDto.getPhone());
-
+        user.setUserName(userSignUpDto.getEmailAddress());
+        user.setEmailAddress(userSignUpDto.getEmailAddress());
+        user.setPhoneNumber(userSignUpDto.getPhoneNumber());
+        user.setPassword(userSignUpDto.getPassword());
         return userService.create(user);
 
     }
+
+
     @RequestMapping(value = "/v1/user/{userId}", method = RequestMethod.PUT)
     public void upateUser(@PathVariable("userId") Long userId,
                                              @RequestBody User user,
@@ -63,9 +70,10 @@ public class UserController {
 
 
     @RequestMapping(value = "/v1/users", method = RequestMethod.GET)
-    public void getAllUsers(HttpServletRequest request,
+    public List<User> getAllUsers(HttpServletRequest request,
                             HttpServletResponse response) {
-        userService.getAll();
+        logger.info("Getting all users");
+        return userService.getAll();
     }
 
 }

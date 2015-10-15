@@ -3,15 +3,17 @@ package com.itu.shareonwheels.service;
 import com.itu.shareonwheels.dao.VehicleDao;
 import com.itu.shareonwheels.entity.Vehicle;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by ramya on 10/8/15.
  */
+@Service
 public class VehicleService implements  GenericService <Vehicle, Long>{
     @Autowired
-    VehicleDao vehicleDao;
+    private VehicleDao vehicleDao;
 
 
     @Override
