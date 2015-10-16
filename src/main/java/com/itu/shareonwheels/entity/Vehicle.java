@@ -32,6 +32,7 @@ public class Vehicle {
 
     public String getModel() {
         return model;
+
     }
 
     public void setModel(String model) {

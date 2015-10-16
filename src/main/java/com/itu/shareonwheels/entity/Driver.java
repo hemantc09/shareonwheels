@@ -58,4 +58,12 @@ public class Driver extends User {
     public void setDriverScheduleList(List<DriverSchedule> driverScheduleList) {
         this.driverScheduleList = driverScheduleList;
     }
+    public String getDriverLicenseNumber() {
+        return driverLicenseNumber;
+    }
+
+    public void setDriverLicenseNumber(String driverLicenseNumber) {
+        this.driverLicenseNumber = driverLicenseNumber;
+    }
+
 }
