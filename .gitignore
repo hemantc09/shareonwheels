@@ -37,8 +37,15 @@ ehthumbs.db
 Thumbs.db
 .idea*
 *.idea*
+**.idea*
+**.idea**
+**/.idea**
 *.iml
 .iml
+**.iml
+*.ipr
+.ipr
+**.ipr
 **/target*
 **/out*
 **/dist*
