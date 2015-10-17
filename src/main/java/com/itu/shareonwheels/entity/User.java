@@ -31,6 +31,7 @@ public class User {
     private Gender gender;
 
     private Date dateOfBirth;
+    private  String status;
 
 
     public Long getUserId() {
@@ -114,4 +115,11 @@ public class User {
     }
 
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

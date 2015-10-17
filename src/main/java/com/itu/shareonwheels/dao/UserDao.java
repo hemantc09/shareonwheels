@@ -14,4 +14,6 @@ public interface UserDao {
     void delete(Long userId);
 
     boolean verifyLogin(String userName, String password);
+
+    void statusUpdate(Long userId, String token);
 }

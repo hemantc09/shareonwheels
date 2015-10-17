@@ -3,9 +3,6 @@ package com.itu.shareonwheels.dao.impl;
 import com.itu.shareonwheels.dao.UserDao;
 import com.itu.shareonwheels.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.RowCallbackHandler;
-import org.springframework.jdbc.core.RowMapper;
-import org.springframework.jdbc.core.SingleColumnRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -14,10 +11,6 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by ramya on 10/7/15.
@@ -30,8 +23,8 @@ public class UserDaoImpl extends NamedParameterJdbcDaoSupport implements UserDao
         setDataSource(dataSource);
     }
 
-    private static final String USER_CREATION_QUERY = "insert into user (user_name, first_name, last_name, email_address, phone_number, password) " +
-            "values (:userName, :firstName, :lastName, :email, :phone, :password)";
+    private static final String USER_CREATION_QUERY = "insert into user (user_name, first_name, last_name, email_address, phone_number, password, Status) " +
+            "values (:userName, :firstName, :lastName, :email, :phone, :password, :status)";
 
     private static final String USER_UPDATION_QUERY = "update user SET first_name = :firstName,last_Name = :lastName,phone_number = :phoneNumber,"+
            " address = :address, gender = :gender, date_of_birth = :dateOfBirth WHERE user_id = :userId";
@@ -54,7 +47,8 @@ public class UserDaoImpl extends NamedParameterJdbcDaoSupport implements UserDao
                         .addValue("lastName", user.getLastName())
                         .addValue("email", user.getEmailAddress())
                         .addValue("phone", user.getPhoneNumber())
-                        .addValue("password", user.getPassword()),
+                        .addValue("password", user.getPassword())
+                        .addValue("status",user.getStatus()),
                 userIdHolder);
 
         return userIdHolder.getKey().longValue();
@@ -95,6 +89,15 @@ public class UserDaoImpl extends NamedParameterJdbcDaoSupport implements UserDao
             return false;
         }
     }
+
+    public void statusUpdate(Long userId, String token)
+    {
+        String statusUpadte_Query = " update user SET User_Status= 'Confirmed' where User_ID= :userId and Status=:token";
+        getNamedParameterJdbcTemplate().update(statusUpadte_Query,new MapSqlParameterSource()
+                .addValue("userId",userId)
+                .addValue("token",token));
+    }
+
 
 
 }

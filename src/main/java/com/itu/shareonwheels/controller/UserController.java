@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by ramya on 9/28/15.
@@ -39,6 +40,7 @@ public class UserController {
         user.setEmailAddress(userSignUpDto.getEmailAddress());
         user.setPhoneNumber(userSignUpDto.getPhoneNumber());
         user.setPassword(userSignUpDto.getPassword());
+        user.setStatus(UUID.randomUUID().toString());
         return userService.create(user);
 
     }
@@ -74,6 +76,14 @@ public class UserController {
                             HttpServletResponse response) {
         logger.info("Getting all users");
         return userService.getAll();
+    }
+
+    @RequestMapping(value = "/v1/user/{userId}/verify", method = RequestMethod.PUT)
+    public void upateStatus(@PathVariable("userId") Long userId, @RequestParam("token") String token,
+                            HttpServletRequest request,
+                            HttpServletResponse response) {
+
+        userService.statusUpdate(userId , token);
     }
 
 }

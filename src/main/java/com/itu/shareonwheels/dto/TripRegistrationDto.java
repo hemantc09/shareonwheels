@@ -1,4 +1,4 @@
-package com.itu.shareonwheels.entity;
+package com.itu.shareonwheels.dto;
 
 import com.itu.shareonwheels.enumerations.DayOfWeek;
 import com.itu.shareonwheels.enumerations.Frequency;
@@ -6,7 +6,8 @@ import com.itu.shareonwheels.enumerations.Frequency;
 /**
  * Created by nikitasonthalia on 10/9/15.
  */
-public class Trip {
+public class TripRegistrationDto {
+
 
     private String startLocation;
     private String destination;
