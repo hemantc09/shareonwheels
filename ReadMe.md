@@ -44,21 +44,21 @@ Project Information high level -
 
 Our modules for shareonwheels are as follows -
 
-Registration -
+Registration -8
 
-Login -
+Login - 5
 
-Rider details and searching trip -
+Rider details and searching trip -8
 
-Driver details and searchign trips - - Vehicle detail
+Driver details and searchign trips - - Vehicle detail 8
 
-My Account information -
+My Account information -8
 
-Final trip search for Driver/Riders both and display them -
+Final trip search for Driver/Riders both and display them -13
 
-Google Map implementation -
+Google Map implementation -5
 
-Add test cases -
+Add test cases -8
 
 Add validations -
 
