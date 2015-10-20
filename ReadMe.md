@@ -28,6 +28,9 @@ This is repository for ITU Ride Share project “Share on Wheels”.
 
 * Maven
 
+Our Story point estimation-
+We will be using story point ranging from 1, 3, 5, 8, 13 , 21 e.t.c to rate our modules. 
+
 
 ## How to Setup?
 
