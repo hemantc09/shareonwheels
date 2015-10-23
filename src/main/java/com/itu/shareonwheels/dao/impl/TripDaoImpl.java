@@ -2,34 +2,29 @@ package com.itu.shareonwheels.dao.impl;
 
 import com.itu.shareonwheels.dao.TripDao;
 import com.itu.shareonwheels.entity.Trip;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+
+import javax.sql.DataSource;
 
 /**
  * Created by nikitasonthalia on 10/9/15.
  */
 
 @Repository
-public class TripDaoImpl extends NamedParameterJdbcDaoSupport implements TripDao {
+public class TripDaoImpl extends NamedParameterJdbcDaoSupport implements TripDao
+{
 
-
-  /* private static final String OnetimeTrip_Creation_Query= "insert into Trip_Table (Start_Location,Destination,Trip_Time,Seat_Available,UserId,User_Type,Trip_Date,User_Type,Days_of_week,Frequency,Trip_type)" +
-           "values(:startLocation , :destination , :tripTime, :seatAvailable, :userId, :userType, :tripDate,:daysOfWeek, :frequency,:tripType)"; */
-
-
-
-
-
-
-
-
-    public void insert(Trip trip) {
-
+    @Autowired
+    public TripDaoImpl(DataSource dataSource) {
+        setDataSource(dataSource);
     }
-
     public void update(Trip trip) {
 
     }
@@ -38,24 +33,23 @@ public class TripDaoImpl extends NamedParameterJdbcDaoSupport implements TripDao
 
     }
 
-    public long create(Trip trip) {
+    public Long create(Trip trip) {
 
-        String triptype = trip.getTripType();
-        if ( triptype=="Routine")
-        {
-              final String OnetimeTrip_Creation_Query= "insert into Trip_Table (Start_Location,Destination,Trip_Time,Seat_Available,UserId,User_Type,User_Type,Days_of_week,Frequency,Trip_type)" +
+        String tripType = trip.getTripType();
+        if (tripType == "Routine") {
+            final String Trip_Creation_Query = "insert into Trip_Table (Start_Location,Destination,Trip_Time,Seat_Available,User_Id,User_Type,Days_of_Week,Frequency,Trip_Type)" +
                     "values(:startLocation , :destination , :tripTime, :seatAvailable, :userId, :userType, :daysOfWeek, :frequency,:tripType)";
 
             KeyHolder keyHolder = new GeneratedKeyHolder();
             getNamedParameterJdbcTemplate().update(
-                    OnetimeTrip_Creation_Query,
+                   Trip_Creation_Query,
                     new MapSqlParameterSource()
-                            .addValue("startlocation", trip.getStartlocation())
-                            .addValue("destiantion",trip.getDestination())
-                            .addValue("triptime",trip.getTriptime())
-                            .addValue("seatavailable",trip.getSeatavailable())
-                            .addValue("userid",trip.getUserid())
-                            .addValue("usertype",trip.getTripdate())
+                            .addValue("startLocation", trip.getStartLocation())
+                            .addValue("destination", trip.getDestination())
+                            .addValue("tripTime", trip.getTripTime())
+                            .addValue("seatAvailable", trip.getSeatAvailable())
+                            .addValue("userId", trip.getUserId())
+                            .addValue("userType", trip.getUserType())
                             .addValue("daysOfWeek", trip.getDayOfWeek())
                             .addValue("frequency", trip.getFrequency())
                             .addValue("tripType", trip.getTripType()),
@@ -64,10 +58,8 @@ public class TripDaoImpl extends NamedParameterJdbcDaoSupport implements TripDao
             return keyHolder.getKey().longValue();
 
 
-        }
-        else
-        {
-              final String OnetimeTrip_Creation_Query= "insert into Trip_Table (Start_Location,Destination,Trip_Time,Seat_Available,UserId,User_Type,Trip_Date,User_Type,Trip_type)" +
+        } else {
+            final String OnetimeTrip_Creation_Query = "insert into Trip_Table (Start_Location,Destination,Trip_Time,Seat_Available,User_Id,User_Type,Trip_Date,Trip_Type)" +
                     "values(:startLocation , :destination , :tripTime, :seatAvailable, :userId, :userType, :tripDate, :tripType)";
 
 
@@ -75,13 +67,13 @@ public class TripDaoImpl extends NamedParameterJdbcDaoSupport implements TripDao
             getNamedParameterJdbcTemplate().update(
                     OnetimeTrip_Creation_Query,
                     new MapSqlParameterSource()
-                            .addValue("startLocation", trip.getStartlocation())
-                            .addValue("destiantion",trip.getDestination())
-                            .addValue("tripTime",trip.getTriptime())
-                            .addValue("seatAvailable",trip.getSeatavailable())
-                            .addValue("userid",trip.getUserid())
-                            .addValue("userType",trip.getTripdate())
-                            .addValue("tripDate", trip.getTripdate())
+                            .addValue("startLocation", trip.getStartLocation())
+                            .addValue("destination", trip.getDestination())
+                            .addValue("tripTime", trip.getTripTime())
+                            .addValue("seatAvailable", trip.getSeatAvailable())
+                            .addValue("userId", trip.getUserId())
+                            .addValue("userType", trip.getUserType())
+                            .addValue("tripDate", trip.getTripDate())
                             .addValue("tripType", trip.getTripType()),
 
                     keyHolder);
@@ -90,23 +82,93 @@ public class TripDaoImpl extends NamedParameterJdbcDaoSupport implements TripDao
 
         }
 
-       /* KeyHolder keyHolder = new GeneratedKeyHolder();
-        getNamedParameterJdbcTemplate().update(
-                OnetimeTrip_Creation_Query,
-                new MapSqlParameterSource()
-                .addValue("startlocation", trip.getStartlocation())
-                        .addValue("destiantion",trip.getDestination())
-                        .addValue("triptime",trip.getTriptime())
-                        .addValue("seatavailable",trip.getSeatavailable())
-                        .addValue("userid",trip.getUserid())
-                        .addValue("usertype",trip.getTripdate())
-                        .addValue("daysOfWeek", trip.getDayOfWeek())
-                        .addValue("frequency", trip.getFrequency())
-                        .addValue("tripType", trip.getTripType()),
 
-                keyHolder);
+    }
+
+    public Trip tripSearch(Trip trip)
+    {
+
+        String startLocation = trip.getStartLocation();
+        String destination=trip.getDestination();
+        String tripTime=trip.getTripTime();
+        String userType;
+        String tripDate=trip.getTripDate();
 
 
-        return keyHolder.getKey().longValue();*/
+        if(startLocation!=null)
+        {
+            if(destination!=null)
+            {
+                if(tripDate!=null)
+                {
+                    if(tripTime!=null)
+                    {
+                        String Trip_Request_Query =  "select * from Trip_table WHERE Start_Location=:startLocation and Destination = :destination and Trip_Date = :tripDate and Trip_Time=:tripTime and Seat_Available>0";
+                      SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("startLocation",startLocation)
+                                                                                        .addValue("destination",destination)
+                                                                                        .addValue("tripDate",tripDate)
+                                                                                        .addValue("tripTime",tripTime);
+                       trip = (Trip)getNamedParameterJdbcTemplate().query(Trip_Request_Query,namedParameters,new BeanPropertyRowMapper(Trip.class));
+                        return trip;
+
+
+
+
+                    }
+                    else
+                    {
+                        String Trip_Request_Query =  "select  * from Trip_table WHERE Start_Location=:startLocation and Destination = :destination and Trip_Date = :tripDate and Trip_Time= current_time and Seat_Available>0";
+                        SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("startLocation", startLocation)
+                                .addValue("destination",destination)
+                                .addValue("tripDate",tripDate);
+                        trip = (Trip)getNamedParameterJdbcTemplate().query(Trip_Request_Query,namedParameters,new BeanPropertyRowMapper(Trip.class));
+                        return trip;
+
+
+                    }
+
+
+                }
+                else
+                {
+                    if(tripTime!=null) {
+                        String Trip_Request_Query = "select * from Trip_table WHERE Start_Location=:startLocation and Destination = : destination and Trip_Date = current_date and Trip_Time=:tripTime and Seat_Available>0";
+                        SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("startLocation", startLocation)
+                                .addValue("destination",destination)
+                                .addValue("tripTime", tripTime);
+
+                        trip = (Trip)getNamedParameterJdbcTemplate().query(Trip_Request_Query,namedParameters,new BeanPropertyRowMapper(Trip.class));
+                        return trip;
+
+                    }
+                    else
+                    {
+                        String Trip_Request_Query = "select * from Trip_table WHERE Start_Location=:startLocation and Destination = : destination and Trip_Date = current_date and Trip_Time=current_time and Seat_Available>0";
+                        SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("startLocation",startLocation)
+                                .addValue("destination",destination);
+                        trip = (Trip)getNamedParameterJdbcTemplate().query(Trip_Request_Query,namedParameters,new BeanPropertyRowMapper(Trip.class));
+                        return trip;
+
+                    }
+
+                }
+            }
+            else
+            {
+                // pass error
+            }
+
+
+        }
+        else
+        {
+                // pass error
+        }
+
+        return trip;
+
+
+
+
     }
 }

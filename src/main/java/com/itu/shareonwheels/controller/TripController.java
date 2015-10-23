@@ -1,10 +1,12 @@
 package com.itu.shareonwheels.controller;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.itu.shareonwheels.dto.TripRegistrationDto;
 import com.itu.shareonwheels.entity.Trip;
 import com.itu.shareonwheels.service.TripService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,27 +18,26 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Created by nikitasonthalia on 10/9/15.
  */
+@Controller
 public class TripController {
 
     @Autowired
     private TripService tripService;
 
     @RequestMapping(value = "/v1/trip", method = RequestMethod.POST)
-    public
-    @ResponseBody
-    long TripRegistration(@RequestBody TripRegistrationDto tripRegistrationDto,
+    public @ResponseBody Long TripRegistration(@RequestBody TripRegistrationDto tripRegistrationDto,
                           HttpServletRequest request,
                           HttpServletResponse response) {
 
         Trip trip = new Trip();
 
-        trip.setStartlocation(tripRegistrationDto.getStartlocation());
+        trip.setStartLocation(tripRegistrationDto.getStartLocation());
         trip.setDestination(tripRegistrationDto.getDestination());
-        trip.setTriptime(tripRegistrationDto.getTriptime());
-        trip.setSeatavailable(tripRegistrationDto.getSeatavailable());
-        trip.setUserid(tripRegistrationDto.getUserid());
-        trip.setUsertype(tripRegistrationDto.getUsertype());
-        trip.setTripdate(tripRegistrationDto.getTripdate());
+        trip.setTripTime(tripRegistrationDto.getTripTime());
+        trip.setSeatAvailable(tripRegistrationDto.getSeatAvailable());
+        trip.setUserId(tripRegistrationDto.getUserId());
+        trip.setUserType(tripRegistrationDto.getUserType());
+        trip.setTripDate(tripRegistrationDto.getTripDate());
         trip.setDayOfWeek(tripRegistrationDto.getDayOfWeek());
         trip.setFrequency(tripRegistrationDto.getFrequency());
         trip.setTripType(tripRegistrationDto.getTripType());
@@ -44,6 +45,30 @@ public class TripController {
 
         return tripService.create(trip);
 
+
+    }
+
+
+
+    @RequestMapping(value = "/v1/trip/search", method = RequestMethod.GET)
+    public @ResponseBody
+    @JsonProperty Trip tripSearch(@RequestBody TripRegistrationDto tripRegistrationDto,
+                     HttpServletRequest request,
+                     HttpServletResponse response)
+    {
+        Trip trip = new Trip();
+        trip.setStartLocation(tripRegistrationDto.getStartLocation());
+        trip.setDestination(tripRegistrationDto.getDestination());
+        trip.setTripTime(tripRegistrationDto.getTripTime());
+        trip.setSeatAvailable(tripRegistrationDto.getSeatAvailable());
+        trip.setUserId(tripRegistrationDto.getUserId());
+        trip.setUserType(tripRegistrationDto.getUserType());
+        trip.setTripDate(tripRegistrationDto.getTripDate());
+        trip.setDayOfWeek(tripRegistrationDto.getDayOfWeek());
+        trip.setFrequency(tripRegistrationDto.getFrequency());
+        trip.setTripType(tripRegistrationDto.getTripType());
+
+        return tripService.tripSearch(trip);
 
     }
 }

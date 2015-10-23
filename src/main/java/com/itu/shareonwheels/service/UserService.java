@@ -27,13 +27,13 @@ public class UserService implements GenericService<User, Long> {
 
     public Long create(User user) {
 
-        String userEmail = user.getEmailAddress();
-        String token = user.getStatus();
-        try {
-            generateAndSendEmail(userEmail,token);
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
+//        String userEmail = user.getEmailAddress();
+//        String token = user.getStatus();
+//        try {
+//            generateAndSendEmail(userEmail,token);
+//        } catch (MessagingException e) {
+//            e.printStackTrace();
+//        }
 
         return userDao.create(user);
     }

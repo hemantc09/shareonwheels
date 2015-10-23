@@ -6,9 +6,10 @@ import com.itu.shareonwheels.entity.Trip;
  */
 public interface TripDao {
 
-    void insert(Trip trip);
+
     void update(Trip trip);
     void delete(Trip trip);
-    long create(Trip trip);
+    Long create(Trip trip);
+    Trip tripSearch(Trip trip);
 
 }

@@ -20,102 +20,88 @@ public class TripRegistrationDto {
     private Frequency frequency;
     private  String tripType;
 
+    public String getStartLocation() {
+        return startLocation;
+    }
+
+    public void setStartLocation(String startLocation) {
+        this.startLocation = startLocation;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public String getTripTime() {
+        return tripTime;
+    }
+
+    public void setTripTime(String tripTime) {
+        this.tripTime = tripTime;
+    }
+
+    public int getSeatAvailable() {
+        return seatAvailable;
+    }
+
+    public void setSeatAvailable(int seatAvailable) {
+        this.seatAvailable = seatAvailable;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
+    public String getTripDate() {
+        return tripDate;
+    }
+
+    public void setTripDate(String tripDate) {
+        this.tripDate = tripDate;
+    }
+
+    public DayOfWeek getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    public void setDayOfWeek(DayOfWeek dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
+    }
+
+    public Frequency getFrequency() {
+        return frequency;
+    }
+
+    public void setFrequency(Frequency frequency) {
+        this.frequency = frequency;
+    }
+
+    public String getTripType() {
+        return tripType;
+    }
+
+    public void setTripType(String tripType) {
+        this.tripType = tripType;
+    }
 
 
 
-    public String getStartlocation()
-    {
-        return this.startLocation;
-    }
 
-    public void setStartlocation(String startlocation)
-    {
-        this.startLocation=startlocation;
-    }
 
-    public String getDestination()
-    {
-        return this.destination;
-    }
-
-    public void setDestination(String destination)
-    {
-        this.destination=destination;
-    }
-
-    public String getTriptime()
-    {
-        return this.tripTime;
-    }
-
-    public void setTriptime(String time)
-    {
-        this.tripTime=time;
-    }
-
-    public int getSeatavailable()
-    {
-        return this.seatAvailable;
-    }
-
-    public void setSeatavailable(int seatavailable)
-    {
-        this.seatAvailable=seatavailable;
-    }
-
-    public String getUserid()
-    {
-        return this.userId;
-    }
-
-    public void setUserid(String userid)
-    {
-        this.userId=userid;
-    }
-
-    public String getUsertype()
-    {
-        return this.userType;
-    }
-
-    public void setUsertype(String usertype)
-    {
-        this.userType=usertype;
-    }
-
-    public String getTripdate()
-    {
-        return this.tripDate;
-    }
-
-    public void setTripdate(String tripdate)
-    {
-        this.tripDate=tripdate;
-    }
-    public DayOfWeek getDayOfWeek()
-    {
-        return this.dayOfWeek;
-    }
-    public void setDayOfWeek(DayOfWeek dayOfWeek)
-    {
-        this.dayOfWeek=dayOfWeek;
-    }
-    public Frequency getFrequency()
-    {
-        return this.frequency;
-    }
-    public void setFrequency(Frequency frequency)
-    {
-        this.frequency=frequency;
-    }
-
-    public String getTripType()
-    {
-        return this.tripType;
-
-    }
-    public void setTripType(String tripType)
-    {
-        this.tripType=tripType;
-    }
 }

@@ -27,7 +27,7 @@ public class UserController {
     private UserService userService;
 
 
-    @RequestMapping(value = "/v1/user", method = RequestMethod.POST)
+    @RequestMapping(value = "/v1/user", method = RequestMethod.POST,headers = "content-type=application/json")
     public @ResponseBody Long signUp(@RequestBody UserSignUpDto userSignUpDto,
                                      HttpServletRequest request,
                        HttpServletResponse response) {

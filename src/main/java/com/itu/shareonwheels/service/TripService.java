@@ -3,21 +3,20 @@ package com.itu.shareonwheels.service;
 import com.itu.shareonwheels.dao.TripDao;
 import com.itu.shareonwheels.entity.Trip;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by nikitasonthalia on 10/9/15.
  */
+@Service
 public class TripService implements GenericService< Trip, Long>
 {
     @Autowired
     private TripDao tripDao;
 
-    public void insert(Trip trip)
-    {
-        tripDao.insert(trip);
-    }
+
 
     public void update(Trip trip)
     {
@@ -38,19 +37,15 @@ public class TripService implements GenericService< Trip, Long>
     }
 
     public Long create(Trip trip) {
-        String trip_Type;
-        trip_Type=trip.getTripType();
-
-        if(trip_Type=="Routine" || trip_Type=="routine")
-        {
 
             return tripDao.create(trip);
-        }
-        else
-        {
-            return tripDao.create(trip);
-        }
 
+    }
+
+    public Trip tripSearch(Trip trip)
+    {
+
+        return tripDao.tripSearch(trip);
     }
 
 }
