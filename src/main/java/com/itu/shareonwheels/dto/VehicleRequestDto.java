@@ -1,8 +1,5 @@
 package com.itu.shareonwheels.dto;
 
-import com.itu.shareonwheels.entity.Driver;
-import com.itu.shareonwheels.enumerations.VehicleType;
-
 /**
  * Created by ramya on 10/8/15.
  */
@@ -18,8 +15,6 @@ public class VehicleRequestDto {
     private int capacity;
 
     private String licencePlateNumber;
-
-    private VehicleType vehicleType;
 
     public Long getVehicleId() {
         return vehicleId;
@@ -53,11 +48,4 @@ public class VehicleRequestDto {
         this.licencePlateNumber = licencePlateNumber;
     }
 
-    public VehicleType getVehicleType() {
-        return vehicleType;
-    }
-
-    public void setVehicleType(VehicleType vehicleType) {
-        this.vehicleType = vehicleType;
-    }
 }

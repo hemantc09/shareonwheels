@@ -16,4 +16,8 @@ public interface UserDao {
     boolean verifyLogin(String userName, String password);
 
     void statusUpdate(Long userId, String token);
+
+    User getByUserName(String userName);
+
+
 }

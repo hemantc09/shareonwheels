@@ -1,7 +1,6 @@
 package com.itu.shareonwheels.controller;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.itu.shareonwheels.dto.TripRegistrationDto;
 import com.itu.shareonwheels.entity.Trip;
 import com.itu.shareonwheels.service.TripService;
@@ -50,9 +49,9 @@ public class TripController {
 
 
 
-    @RequestMapping(value = "/v1/trip/search", method = RequestMethod.GET)
+    @RequestMapping(value = "/v1/tripper", method = RequestMethod.GET)
     public @ResponseBody
-    @JsonProperty Trip tripSearch(@RequestBody TripRegistrationDto tripRegistrationDto,
+    Trip tripSearch(@RequestBody TripRegistrationDto tripRegistrationDto,
                      HttpServletRequest request,
                      HttpServletResponse response)
     {
@@ -61,7 +60,7 @@ public class TripController {
         trip.setDestination(tripRegistrationDto.getDestination());
         trip.setTripTime(tripRegistrationDto.getTripTime());
         trip.setSeatAvailable(tripRegistrationDto.getSeatAvailable());
-        trip.setUserId(tripRegistrationDto.getUserId());
+        //trip.setUserId(tripRegistrationDto.getUserId());
         trip.setUserType(tripRegistrationDto.getUserType());
         trip.setTripDate(tripRegistrationDto.getTripDate());
         trip.setDayOfWeek(tripRegistrationDto.getDayOfWeek());

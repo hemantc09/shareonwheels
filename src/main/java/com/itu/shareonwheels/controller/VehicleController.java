@@ -20,17 +20,18 @@ public class VehicleController {
     @Autowired
     VehicleService vehicleService;
 
-    @RequestMapping(value = "v1/driver/{driverId}/vehicle",method = RequestMethod.POST)
+    @RequestMapping(value = "v1/driver/{userId}/vehicle",method = RequestMethod.POST)
     public @ResponseBody Long addVehicle(@RequestBody VehicleRequestDto vehicleRequestDto,
-                              @PathVariable("driverId") Long ownerId,
+                              @PathVariable("userId") Long ownerId,
                               HttpServletRequest request,
                               HttpServletResponse response)
     {
         Vehicle vehicle = new Vehicle();
         vehicle.setModel(vehicleRequestDto.getModel());
         vehicle.setCapacity(vehicleRequestDto.getCapacity());
+        System.out.println("The owner id is"+ ownerId);
         vehicle.setLicencePlateNumber(vehicleRequestDto.getLicencePlateNumber());
-        vehicle.setVehicleType(vehicleRequestDto.getVehicleType());
+      //  vehicle.setVehicleType(vehicleRequestDto.getVehicleType());
         vehicle.setOwnerId(ownerId);
 
         return vehicleService.create(vehicle);
@@ -48,7 +49,7 @@ public class VehicleController {
         vehicle.setModel(vehicleRequestDto.getModel());
         vehicle.setCapacity(vehicleRequestDto.getCapacity());
         vehicle.setLicencePlateNumber(vehicleRequestDto.getLicencePlateNumber());
-        vehicle.setVehicleType(vehicleRequestDto.getVehicleType());
+        //vehicle.setVehicleType(vehicleRequestDto.getVehicleType());
         vehicle.setOwnerId(ownerId);
 
         vehicleService.update(vehicle);

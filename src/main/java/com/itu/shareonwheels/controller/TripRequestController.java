@@ -20,7 +20,7 @@ public class TripRequestController {
 
     @RequestMapping(value = "/v1/trip/request/{userId}", method = RequestMethod.PUT)
     public @ResponseBody
-    void tripRequest(@RequestBody TripRequestDto tripRequestDto, @PathVariable("userId") Long userId,
+    Long tripRequest(@RequestBody TripRequestDto tripRequestDto, @PathVariable("userId") Long userId,
                                                                         HttpServletRequest request,
                                                                          HttpServletResponse response){
 
@@ -33,7 +33,7 @@ public class TripRequestController {
         trip.setUserType(tripRequestDto.getUsertype());
         trip.setTripType(tripRequestDto.getTripType());
 
-      //  return tripRequestService.tripRequest(trip);
+       return tripRequestService.tripRequest(trip);
 
 
 

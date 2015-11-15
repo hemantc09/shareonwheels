@@ -39,6 +39,5 @@ public class VehicleService implements  GenericService <Vehicle, Long>{
     @Override
     public void removeById(Long aLong) {
         vehicleDao.delete(aLong);
-
     }
 }

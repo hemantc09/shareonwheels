@@ -103,12 +103,13 @@ public class TripDaoImpl extends NamedParameterJdbcDaoSupport implements TripDao
                 {
                     if(tripTime!=null)
                     {
-                        String Trip_Request_Query =  "select * from Trip_table WHERE Start_Location=:startLocation and Destination = :destination and Trip_Date = :tripDate and Trip_Time=:tripTime and Seat_Available>0";
+                        String Trip_Request_Query =  "select * from Trip_table WHERE Start_Location=:startLocation and Destination = ? and Trip_Date = ? and Trip_Time=? and Seat_Available>0";
                       SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("startLocation",startLocation)
                                                                                         .addValue("destination",destination)
                                                                                         .addValue("tripDate",tripDate)
                                                                                         .addValue("tripTime",tripTime);
-                       trip = (Trip)getNamedParameterJdbcTemplate().query(Trip_Request_Query,namedParameters,new BeanPropertyRowMapper(Trip.class));
+                        trip  =(Trip)getJdbcTemplate().queryForObject(Trip_Request_Query, new Object[]{startLocation, destination,tripDate,tripTime}, new BeanPropertyRowMapper(Trip.class));
+
                         return trip;
 
 
@@ -117,11 +118,12 @@ public class TripDaoImpl extends NamedParameterJdbcDaoSupport implements TripDao
                     }
                     else
                     {
-                        String Trip_Request_Query =  "select  * from Trip_table WHERE Start_Location=:startLocation and Destination = :destination and Trip_Date = :tripDate and Trip_Time= current_time and Seat_Available>0";
+                        String Trip_Request_Query =  "select  * from Trip_table WHERE Start_Location=:startLocation and Destination = ? and Trip_Date =? and Trip_Time= current_time and Seat_Available>0";
                         SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("startLocation", startLocation)
                                 .addValue("destination",destination)
                                 .addValue("tripDate",tripDate);
-                        trip = (Trip)getNamedParameterJdbcTemplate().query(Trip_Request_Query,namedParameters,new BeanPropertyRowMapper(Trip.class));
+                        trip  =(Trip)getJdbcTemplate().queryForObject(Trip_Request_Query, new Object[]{startLocation,destination,tripDate}, new BeanPropertyRowMapper(Trip.class));
+
                         return trip;
 
 
@@ -132,21 +134,21 @@ public class TripDaoImpl extends NamedParameterJdbcDaoSupport implements TripDao
                 else
                 {
                     if(tripTime!=null) {
-                        String Trip_Request_Query = "select * from Trip_table WHERE Start_Location=:startLocation and Destination = : destination and Trip_Date = current_date and Trip_Time=:tripTime and Seat_Available>0";
+                        String Trip_Request_Query = "select * from Trip_table WHERE Start_Location=:startLocation and Destination = ? and Trip_Date = current_date and Trip_Time=? and Seat_Available>0";
                         SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("startLocation", startLocation)
                                 .addValue("destination",destination)
                                 .addValue("tripTime", tripTime);
 
-                        trip = (Trip)getNamedParameterJdbcTemplate().query(Trip_Request_Query,namedParameters,new BeanPropertyRowMapper(Trip.class));
+                        trip  =(Trip)getJdbcTemplate().queryForObject(Trip_Request_Query, new Object[]{startLocation,destination,tripTime}, new BeanPropertyRowMapper(Trip.class));
                         return trip;
 
                     }
                     else
                     {
-                        String Trip_Request_Query = "select * from Trip_table WHERE Start_Location=:startLocation and Destination = : destination and Trip_Date = current_date and Trip_Time=current_time and Seat_Available>0";
+                        String Trip_Request_Query = "select * from Trip_table WHERE Start_Location=? and Destination =? and Trip_Date = current_date and Trip_Time=current_time and Seat_Available>0";
                         SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("startLocation",startLocation)
                                 .addValue("destination",destination);
-                        trip = (Trip)getNamedParameterJdbcTemplate().query(Trip_Request_Query,namedParameters,new BeanPropertyRowMapper(Trip.class));
+                        trip  =(Trip)getJdbcTemplate().queryForObject(Trip_Request_Query, new Object[]{startLocation, destination}, new BeanPropertyRowMapper(Trip.class));
                         return trip;
 
                     }

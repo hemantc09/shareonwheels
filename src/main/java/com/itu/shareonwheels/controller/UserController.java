@@ -2,7 +2,7 @@ package com.itu.shareonwheels.controller;
 
 import com.itu.shareonwheels.dto.UserSignUpDto;
 import com.itu.shareonwheels.entity.User;
-import com.itu.shareonwheels.service.UserService;
+import com.itu.shareonwheels.service.UserServiceImpl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +24,10 @@ public class UserController {
     private static Log logger = LogFactory.getLog(UserController.class);
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
 
 
-    @RequestMapping(value = "/v1/user", method = RequestMethod.POST,headers = "content-type=application/json")
+    @RequestMapping(value = "/v1/user", method = RequestMethod.POST)//headers = "Access-Control-Allow-Origin=http://localhost:63342" )
     public @ResponseBody Long signUp(@RequestBody UserSignUpDto userSignUpDto,
                                      HttpServletRequest request,
                        HttpServletResponse response) {
