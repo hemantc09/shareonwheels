@@ -29,7 +29,7 @@ public class VehicleController {
         Vehicle vehicle = new Vehicle();
         vehicle.setModel(vehicleRequestDto.getModel());
         vehicle.setCapacity(vehicleRequestDto.getCapacity());
-        System.out.println("The owner id is"+ ownerId);
+        //System.out.println("The owner id is"+ ownerId);
         vehicle.setLicencePlateNumber(vehicleRequestDto.getLicencePlateNumber());
       //  vehicle.setVehicleType(vehicleRequestDto.getVehicleType());
         vehicle.setOwnerId(ownerId);
@@ -64,13 +64,12 @@ public class VehicleController {
         vehicleService.removeById(vehicleId);
     }
 
-    @RequestMapping(value = "v1/driver/{driverId}/vehicle/{vehicleId}",method = RequestMethod.GET)
+    @RequestMapping(value = "v1/driver/{driverId}/getvehical",method ={RequestMethod.GET, RequestMethod.POST})
     public @ResponseBody Vehicle getVehicle(@PathVariable("driverId") Long ownerId,
-                                            @PathVariable("vehicleId") Long vehicleId,
                                             HttpServletRequest request,
                                             HttpServletResponse response)
     {
-        return vehicleService.get(vehicleId);
+        return vehicleService.get(ownerId);
     }
 
 

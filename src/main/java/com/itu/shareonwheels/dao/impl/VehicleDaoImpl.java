@@ -1,15 +1,23 @@
 package com.itu.shareonwheels.dao.impl;
 
 import com.itu.shareonwheels.dao.VehicleDao;
+import com.itu.shareonwheels.entity.User;
 import com.itu.shareonwheels.entity.Vehicle;
+import com.itu.shareonwheels.enumerations.Gender;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * Created by ramya on 10/8/15.
@@ -47,6 +55,28 @@ public class VehicleDaoImpl extends NamedParameterJdbcDaoSupport implements Vehi
 
     }
 
+
+    public Vehicle getVehicleDetailsByUserId(Long ownerId) {
+
+        //Vehicle vehicle = new Vehicle();
+        String GET_VEHICLE_DETAILS = "select car_model_name,capacity,licence_plate_number from vehicle WHERE owner_id=:ownerId ";
+        SqlParameterSource sqlParameter = new MapSqlParameterSource().addValue("ownerId", ownerId);
+
+        return   getNamedParameterJdbcTemplate().query(GET_VEHICLE_DETAILS,sqlParameter, new ResultSetExtractor<Vehicle>() {
+            @Override
+            public Vehicle extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+                Vehicle vehicle = new Vehicle();
+                while (resultSet.next())
+                {
+                    vehicle.setLicencePlateNumber(resultSet.getString("licence_plate_number"));
+                    vehicle.setCapacity(resultSet.getInt("capacity"));
+                    vehicle.setModel(resultSet.getString("car_model_name"));
+                }
+                return vehicle;
+            }
+        });
+    }
+
     @Override
     public void update(Vehicle vehicle) {
 
@@ -63,5 +93,15 @@ public class VehicleDaoImpl extends NamedParameterJdbcDaoSupport implements Vehi
     public void delete(Long vehicleId) {
         getNamedParameterJdbcTemplate().update(VEHICLE_DELETION_QUERY,new MapSqlParameterSource()
                 .addValue("vehicleId",vehicleId));
+    }
+
+    @Override
+    public Vehicle get(Long aLong) {
+
+        Vehicle vehicle=new Vehicle();
+        String GET_USER_ID = "select * from vehicle WHERE owner_id=?";
+        //SqlParameterSource sqlParameter = new MapSqlParameterSource().addValue("userName", userName);
+        vehicle  =(Vehicle)getJdbcTemplate().queryForObject(GET_USER_ID,new Object[] { aLong}, new BeanPropertyRowMapper(Vehicle.class));
+        return vehicle;
     }
 }

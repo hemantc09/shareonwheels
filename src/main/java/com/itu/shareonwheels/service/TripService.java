@@ -42,7 +42,7 @@ public class TripService implements GenericService< Trip, Long>
 
     }
 
-    public Trip tripSearch(Trip trip)
+    public List<Trip> tripSearch(Trip trip)
     {
 
         return tripDao.tripSearch(trip);

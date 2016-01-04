@@ -18,22 +18,22 @@ public class TripRequestController {
     @Autowired
     private TripRequestService tripRequestService;
 
-    @RequestMapping(value = "/v1/trip/request/{userId}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/v1/trip/request/{userId}", method ={RequestMethod.PUT, RequestMethod.POST})
     public @ResponseBody
-    Long tripRequest(@RequestBody TripRequestDto tripRequestDto, @PathVariable("userId") Long userId,
+    Long tripRequest(@RequestBody TripRequestDto tripRequestDto, @PathVariable("userId") Long requesterId,
                                                                         HttpServletRequest request,
                                                                          HttpServletResponse response){
 
         Trip trip = new Trip();
 
 
+        trip.setUserId(tripRequestDto.getUserId());
+        trip.setUserType(tripRequestDto.getUserType());
         trip.setTripId(tripRequestDto.getTripId());
-        trip.setSeatAvailable(tripRequestDto.getSeatavailable());
-        trip.setUserId(tripRequestDto.getUserid());
-        trip.setUserType(tripRequestDto.getUsertype());
         trip.setTripType(tripRequestDto.getTripType());
 
-       return tripRequestService.tripRequest(trip);
+
+       return tripRequestService.tripRequest(trip,requesterId);
 
 
 

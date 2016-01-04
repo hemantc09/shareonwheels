@@ -28,7 +28,7 @@ public class VehicleService implements  GenericService <Vehicle, Long>{
 
     @Override
     public Vehicle get(Long aLong) {
-        return null;
+        return vehicleDao.get(aLong);
     }
 
     @Override
@@ -40,4 +40,9 @@ public class VehicleService implements  GenericService <Vehicle, Long>{
     public void removeById(Long aLong) {
         vehicleDao.delete(aLong);
     }
+
+    public Vehicle getVehicleDetailsByUserId(Long userId){
+       return vehicleDao.getVehicleDetailsByUserId(userId);
+    }
+
 }

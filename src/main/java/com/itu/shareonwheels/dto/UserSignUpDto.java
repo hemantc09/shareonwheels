@@ -17,6 +17,7 @@ public class UserSignUpDto {
     "phone":"123456789"
     }
      */
+    private Long userId;
     private String firstName;
     private String lastName;
     private String emailAddress;
@@ -36,6 +37,16 @@ public class UserSignUpDto {
 
     private Gender gender;
 
+    private String dateOfBirth;
+
+
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
 
     public String getZipCode() {
         return zipCode;
@@ -126,5 +137,13 @@ public class UserSignUpDto {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

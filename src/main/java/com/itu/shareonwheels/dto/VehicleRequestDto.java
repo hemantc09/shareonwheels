@@ -14,6 +14,9 @@ public class VehicleRequestDto {
     //# of passengers
     private int capacity;
 
+
+    private Long ownerId;
+
     private String licencePlateNumber;
 
     public Long getVehicleId() {
@@ -46,6 +49,13 @@ public class VehicleRequestDto {
 
     public void setLicencePlateNumber(String licencePlateNumber) {
         this.licencePlateNumber = licencePlateNumber;
+    }
+    public Long getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(Long ownerId) {
+        this.ownerId = ownerId;
     }
 
 }

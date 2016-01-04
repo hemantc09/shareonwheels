@@ -15,7 +15,7 @@ public class LoginServiceImpl  implements LoginService{
     @Autowired
     private UserDao userDao;
 
-    public boolean validateUser(String userName, String password)
+    public String validateUser(String userName, String password)
     {
         return userDao.verifyLogin(userName,password);
     }

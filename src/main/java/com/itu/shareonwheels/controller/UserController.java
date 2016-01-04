@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
@@ -38,10 +40,19 @@ public class UserController {
         user.setLastName(userSignUpDto.getLastName());
         user.setUserName(userSignUpDto.getEmailAddress());
         user.setEmailAddress(userSignUpDto.getEmailAddress());
+
+        user.setAddressLine1(userSignUpDto.getAddressLine1());
+        user.setAddressLine2(userSignUpDto.getAddressLine2());
+        user.setCity(userSignUpDto.getCity());
+        user.setState(userSignUpDto.getState());
+        user.setZipCode(userSignUpDto.getZipCode());
+       // System.out.println("The zip code recieved is"+userSignUpDto.getZipCode());
         user.setPhoneNumber(userSignUpDto.getPhoneNumber());
         user.setPassword(userSignUpDto.getPassword());
+        user.setGender(userSignUpDto.getGender());
+        user.setDateOfBirth(userSignUpDto.getDateOfBirth());
         user.setStatus(UUID.randomUUID().toString());
-        return userService.create(user);
+        return  userService.create(user);
 
     }
 
@@ -63,11 +74,12 @@ public class UserController {
         userService.removeById(userId);
     }
 
-    @RequestMapping(value = "/v1/user/{userId}", method = RequestMethod.GET)
-    public void getUser(@PathVariable("userId") Long userId,
+    @RequestMapping(value = "/v1/user/get/{ownerId}", method = RequestMethod.GET)
+    public User getUser(@PathVariable("ownerId") Long ownerId,
                                   HttpServletRequest request,
                                   HttpServletResponse response) {
-        userService.get(userId);
+        System.out.print("User Controller");
+       return userService.get(ownerId);
     }
 
 
@@ -78,12 +90,22 @@ public class UserController {
         return userService.getAll();
     }
 
-    @RequestMapping(value = "/v1/user/{userId}/verify", method = RequestMethod.PUT)
+    @RequestMapping(value = "/v1/user/verify/{userId}", method = {RequestMethod.GET,RequestMethod.PUT})
     public void upateStatus(@PathVariable("userId") Long userId, @RequestParam("token") String token,
                             HttpServletRequest request,
-                            HttpServletResponse response) {
+                            HttpServletResponse response) throws IOException {
 
         userService.statusUpdate(userId , token);
+        response.sendRedirect("http://localhost:63342/shareonwheels/web/Index.html");
+    }
+    @RequestMapping(value = "/v1/user/forgotpassword", method = RequestMethod.POST)
+    public void forgotpassword(@RequestBody UserSignUpDto userSignUpDto,
+                            HttpServletRequest request,
+                            HttpServletResponse response) throws IOException, MessagingException {
+        User user = new User();
+        user.setEmailAddress(userSignUpDto.getEmailAddress());
+        userService.forgotpassword(user);
+
     }
 
 }

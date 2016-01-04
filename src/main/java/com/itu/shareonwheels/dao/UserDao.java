@@ -13,11 +13,11 @@ public interface UserDao {
 
     void delete(Long userId);
 
-    boolean verifyLogin(String userName, String password);
+    String verifyLogin(String userName, String password);
 
     void statusUpdate(Long userId, String token);
 
     User getByUserName(String userName);
-
-
+    User get(Long userId);
+    User forgotpassword(String emailId);
 }

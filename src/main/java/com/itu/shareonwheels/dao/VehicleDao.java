@@ -1,6 +1,5 @@
 package com.itu.shareonwheels.dao;
 
-import com.itu.shareonwheels.entity.User;
 import com.itu.shareonwheels.entity.Vehicle;
 
 /**
@@ -12,4 +11,8 @@ public interface VehicleDao {
     void update(Vehicle vehicle);
 
     void delete(Long vehicleId);
+
+    Vehicle get(Long aLong);
+
+    Vehicle getVehicleDetailsByUserId(Long userId);
 }

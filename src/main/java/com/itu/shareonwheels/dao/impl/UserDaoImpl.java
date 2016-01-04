@@ -33,34 +33,43 @@ public class UserDaoImpl extends NamedParameterJdbcDaoSupport implements UserDao
     private static final String USER_DELETION_QUERY = "DELETE FROM user WHERE user_id = :userId";
 
 
-
-
-
     public Long create(User user) {
+            String userName = user.getUserName();
+            String VERIFY_DUPLICATE_USER = "select count(*) from user WHERE user_name=:userName";
+            SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("userName", userName);
 
-        KeyHolder userIdHolder = new GeneratedKeyHolder();
-        System.out.println("In user DAO");
-        getNamedParameterJdbcTemplate().update(
-                USER_CREATION_QUERY,
-                new MapSqlParameterSource()
-                        .addValue("userName", user.getUserName())
-                        .addValue("firstName", user.getFirstName())
-                        .addValue("lastName", user.getLastName())
-                        .addValue("email", user.getEmailAddress())
-                        .addValue("phone", user.getPhoneNumber())
-                        .addValue("password", user.getPassword())
-                        .addValue("addressLine1", user.getAddressLine1())
-                        .addValue("addressLine2", user.getAddressLine2())
-                        .addValue("city", user.getCity())
-                        .addValue("state", user.getState())
-                        .addValue("zipCode", user.getZipCode())
-                        .addValue("gender", user.getGender().name())
-                        .addValue("status", user.getStatus()),
-                userIdHolder);
+            int rowCount = getNamedParameterJdbcTemplate().queryForObject(VERIFY_DUPLICATE_USER, namedParameters, Integer.class);
+            if (rowCount == 1) {
+                // to check for duplicate
 
-        return userIdHolder.getKey().longValue();
+                return  123456789l;
+              //  throw new DuplicateEntityException("User name alredy exists");
+            } else {
+                KeyHolder userIdHolder = new GeneratedKeyHolder();
+                System.out.println("In user DAO" + user.getUserName());
+                getNamedParameterJdbcTemplate().update(
+                        USER_CREATION_QUERY,
+                        new MapSqlParameterSource()
+                                .addValue("userName", user.getUserName())
+                                .addValue("firstName", user.getFirstName())
+                                .addValue("lastName", user.getLastName())
+                                .addValue("email", user.getEmailAddress())
+                                .addValue("phone", user.getPhoneNumber())
+                                .addValue("password", user.getPassword())
+                                .addValue("addressLine1", user.getAddressLine1())
+                                .addValue("addressLine2", user.getAddressLine2())
+                                .addValue("city", user.getCity())
+                                .addValue("state", user.getState())
+                                .addValue("zipCode", user.getZipCode())
+                                .addValue("gender", user.getGender().name())
+                                .addValue("status", user.getStatus()),
+                        userIdHolder);
 
-    }
+                return userIdHolder.getKey().longValue();
+            }
+
+      }
+
 
 
     public void update(User user) {
@@ -84,22 +93,35 @@ public class UserDaoImpl extends NamedParameterJdbcDaoSupport implements UserDao
                             .addValue("userId",userId));
     }
 
-    public boolean verifyLogin(String userName, String password) {
-        String VERIFY_USER_LOGIN_QUERY =  "select count(*) from user WHERE user_name=:userName and password = :password";
+    public String verifyLogin(String userName, String password) {
+        String VERIFY_USER_LOGIN_QUERY = "select count(*) from user WHERE user_name=:userName and password = :password";
 
-
-
-        SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("userName",userName).addValue("password",password);
+        SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("userName", userName).addValue("password",password);
         int rowCount = getNamedParameterJdbcTemplate().queryForObject(VERIFY_USER_LOGIN_QUERY, namedParameters, Integer.class);
 
         if(rowCount == 1){
-            return true;
+            String VERIFY_USER_LOGIN_STATUS= "select count(*) from user WHERE user_name=:userName and password = :password and status=:status";
+            SqlParameterSource namedParameters1 = new MapSqlParameterSource().addValue("userName",userName).addValue("password",password).addValue("status","Confirmed");
+            int statusRowCount = getNamedParameterJdbcTemplate().queryForObject(VERIFY_USER_LOGIN_STATUS, namedParameters1, Integer.class);
+            if(statusRowCount == 1)
+            {
+                return "USER_CONFIRMED";
+            }else {
+                return "NOT_CONFIRMED";
+            }
         }
         else{
-            return false;
+            return "USERNAME_PASSWORD_DOES_NOT_MATCH";
         }
     }
+    public User get(Long userId){
+        User user = new User();
 
+        String GET_USER_DETAILS = "select first_name,last_name,user_name,email_address,phone_number,date_of_birth,gender,address_line1,address_line2,state,city,zipcode from user WHERE user_id=?";
+        //SqlParameterSource sqlParameter = new MapSqlParameterSource().addValue("userName", userName);
+        user  =(User)getJdbcTemplate().queryForObject(GET_USER_DETAILS,new Object[] { userId }, new BeanPropertyRowMapper(User.class));
+        return user;
+    }
     @Override
     public User getByUserName(String userName) {
         User user = new User();
@@ -138,13 +160,25 @@ public class UserDaoImpl extends NamedParameterJdbcDaoSupport implements UserDao
        return  user;
     }
 
+    @Override
+    public User forgotpassword(String emailId) {
+        User user = new User();
+        System.out.print(emailId);
+        String Forgot_Password_Qrerry="select * from user where email_address=?";
+        user  =(User)getJdbcTemplate().queryForObject(Forgot_Password_Qrerry,new Object[] { emailId }, new BeanPropertyRowMapper(User.class));
+
+        return user;
+    }
+
 
     public void statusUpdate(Long userId, String token)
     {
-        String statusUpadte_Query = " update user SET User_Status= 'Confirmed' where User_ID= :userId and Status=:token";
+        String statusUpadte_Query = " update user SET status= 'Confirmed' where user_id= :userId and status=:token";
+        KeyHolder keyholder = new GeneratedKeyHolder();
         getNamedParameterJdbcTemplate().update(statusUpadte_Query,new MapSqlParameterSource()
                 .addValue("userId",userId)
-                .addValue("token",token));
+                .addValue("token",token)
+                .addValue("status","Confirmed"),keyholder);
     }
 
 

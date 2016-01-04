@@ -2,8 +2,6 @@ package com.itu.shareonwheels.entity;
 
 import com.itu.shareonwheels.enumerations.Gender;
 
-import java.util.Date;
-
 /**
  * Created by ramya on 9/28/15.
  */
@@ -28,7 +26,7 @@ public class User {
 
     private Gender gender;
 
-    private Date dateOfBirth;
+    private String dateOfBirth;
 
     private  String status;
 
@@ -149,11 +147,11 @@ public class User {
         this.gender = gender;
     }
 
-    public Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(String dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

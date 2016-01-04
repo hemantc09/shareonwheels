@@ -29,7 +29,7 @@ public class LoginController {
 
 
 
-    private boolean loggedInResult;
+    private String loggedInResult;
 
     @RequestMapping(value = "/v1/login", method ={RequestMethod.GET, RequestMethod.POST})
     public @ResponseBody
@@ -44,7 +44,7 @@ public class LoginController {
 
         loggedInResult = loginService.validateUser(userName, password);
 
-        if (loggedInResult==true)
+        if (loggedInResult == "USER_CONFIRMED")
         {
             response.setStatus(200);
 
@@ -52,14 +52,17 @@ public class LoginController {
             cookie.setMaxAge(60 * 60);
 
             response.addCookie(cookie);
-           // response.addCookie(Cookie);
+            // response.addCookie(Cookie);
 
             return userService.get(userName);
 
         }
-        else
+        else if(loggedInResult == "NOT_CONFIRMED")
         {
-             response.sendError(403);
+            response.sendError(401, "Status not confirmed");
+        }else
+        {
+            response.sendError(403,"Username and paasword not matching");
         }
         return user;
     }

@@ -3,16 +3,13 @@ package com.itu.shareonwheels;
 /**
  * Created by ramya on 10/2/15.
  */
-import com.itu.shareonwheels.dao.UserDao;
-import com.itu.shareonwheels.dao.impl.UserDaoImpl;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.servlet.ServletContextEvent;
@@ -20,9 +17,11 @@ import javax.servlet.ServletContextListener;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
+
+//@EnableWebSecurity
 @SpringBootApplication
 @EnableAutoConfiguration
-public class ShareOnWheelsServer {
+public class ShareOnWheelsServer{// extends WebSecurityConfigurerAdapter {
 
     private static Log logger = LogFactory.getLog(ShareOnWheelsServer.class);
 
@@ -56,6 +55,12 @@ public class ShareOnWheelsServer {
 
         };
     }
+
+//    @Override
+//   protected void configure(HttpSecurity httpSecurity) throws Exception{
+//       httpSecurity.csrf().disable();
+//   }
+
 
     public static void main(String[] args) {
         SpringApplication.run(ShareOnWheelsServer.class, args);

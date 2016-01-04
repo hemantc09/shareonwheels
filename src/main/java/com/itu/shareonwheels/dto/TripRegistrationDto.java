@@ -16,7 +16,7 @@ public class TripRegistrationDto {
     private String userId;
     private String userType;
     private String tripDate;
-    private DayOfWeek dayOfWeek;
+    private DayOfWeek[] dayOfWeek;
     private Frequency frequency;
     private  String tripType;
 
@@ -76,11 +76,11 @@ public class TripRegistrationDto {
         this.tripDate = tripDate;
     }
 
-    public DayOfWeek getDayOfWeek() {
+    public DayOfWeek[] getDayOfWeek() {
         return dayOfWeek;
     }
 
-    public void setDayOfWeek(DayOfWeek dayOfWeek) {
+    public void setDayOfWeek(DayOfWeek[] dayOfWeek) {
         this.dayOfWeek = dayOfWeek;
     }
 
